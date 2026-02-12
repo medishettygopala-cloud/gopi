@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Group Portfolio</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  color:white;
+  overflow-x:hidden;
+}
+
+/* ===== NAVBAR ===== */
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(15px);
+  background:rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+}
+
+nav h2{
+  font-weight:700;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+}
+
+nav ul li{
+  margin-left:25px;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:white;
+  font-weight:500;
+  transition:0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active{
+  color:#ffeb3b;
+}
+
+/* ===== SECTION STYLE ===== */
+section{
+  min-height:100vh;
+  padding:120px 10%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  transform:translateX(100px);
+  opacity:0;
+  transition:1s ease;
+}
+
+section.show{
+  transform:translateX(0);
+  opacity:1;
+}
+
+/* ===== GLASS CARD ===== */
+.glass{
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(20px);
+  padding:30px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.3);
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* ===== HOME ===== */
+#home{
+  text-align:center;
+}
+
+#home h1{
+  font-size:50px;
+}
+
+#home button{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:#ffeb3b;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+#home button:hover{
+  transform:scale(1.1);
+}
+
+/* ===== MEMBERS ===== */
+.members{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.member{
+  width:250px;
+  text-align:center;
+  transition:0.4s;
+}
+
+.member:hover{
+  transform:translateY(-10px);
+}
+
+/* ===== SKILLS ===== */
+.skill{
+  margin:20px 0;
+}
+
+.bar{
+  height:20px;
+  background:rgba(255,255,255,0.2);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#ff512f,#dd2476);
+  transition:2s;
+}
+
+/* ===== PROJECTS ===== */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.project{
+  transition:0.4s;
+}
+
+.project:hover{
+  transform:scale(1.05);
+}
+
+/* ===== CONTACT ===== */
+form input, form textarea{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:none;
+  border-radius:10px;
+}
+
+form button{
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:#ffeb3b;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  nav ul{
+    flex-direction:column;
+    background:rgba(0,0,0,0.5);
+    position:absolute;
+    top:60px;
+    right:-200px;
+    width:200px;
+    padding:20px;
+    transition:0.4s;
+  }
+
+  nav ul.showMenu{
+    right:0;
+  }
+
+  .menu-btn{
+    cursor:pointer;
+    display:block;
+  }
+}
+
+.menu-btn{
+  display:none;
+  font-size:24px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+  <h2>TECH TRIO</h2>
+  <div class="menu-btn">☰</div>
+  <ul>
+    <li><a href="#home" class="nav-link active">Home</a></li>
+    <li><a href="#members" class="nav-link">Team</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+</header>
+
+<!-- HOME -->
+<section id="home">
+  <div class="glass">
+    <h1>We Build Modern Web Experiences 🚀</h1>
+    <p> Portfolio Presentation</p>
+    <button onclick="document.getElementById('members').scrollIntoView()">Meet Our Team</button>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="members">
+  <div class="glass">
+    <h2>Our Team</h2>
+    <div class="members">
+      <div class="member glass">
+        <h3>Pavani</h3>
+        <p>Frontend Developer</p>
+      </div>
+      <div class="member glass">
+        <h3>Gopala krishna</h3>
+        <p>Backend Developer</p>
+      </div>
+      <div class="member glass">
+        <h3>Sricharan</h3>
+        <p>UI/UX Designer</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="glass">
+    <h2>Our Skills</h2>
+
+    <div class="skill">
+      <p>HTML</p>
+      <div class="bar"><div class="progress" data-width="95%"></div></div>
+    </div>
+
+    <div class="skill">
+      <p>CSS</p>
+      <div class="bar"><div class="progress" data-width="90%"></div></div>
+    </div>
+
+    <div class="skill">
+      <p>JavaScript</p>
+      <div class="bar"><div class="progress" data-width="85%"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="glass">
+    <h2>🚀 B.Tech 1st Year Projects Showcase</h2>
+    <p style="margin-bottom:20px;">
+      Academic projects developed as part of our first-year engineering curriculum.
+    </p>
+
+    <div class="projects">
+
+      <div class="project glass">
+        <h3>📊 Student Result Management System</h3>
+        <p>
+          A web-based system to input student marks, calculate total, average,
+          and assign grades dynamically using JavaScript.
+        </p>
+        <small><b>Technologies:</b> HTML, CSS, JavaScript</small>
+      </div>
+
+      <div class="project glass">
+        <h3>💰 AI-Based Personal Expense Tracker</h3>
+        <p>
+          Smart expense tracking system that categorizes income and expenses,
+          calculates balance, and provides financial insights.
+        </p>
+        <small><b>Technologies:</b> HTML, CSS, JS / Python (Optional)</small>
+      </div>
+
+      <div class="project glass">
+        <h3>📝 Online Quiz Application</h3>
+        <p>
+          Interactive quiz platform with timer, score calculation,
+          and automatic result display.
+        </p>
+        <small><b>Technologies:</b> HTML, CSS, JavaScript</small>
+      </div>
+
+      <div class="project glass">
+        <h3>✅ Smart To-Do List App</h3>
+        <p>
+          Task management application allowing users to add, delete,
+          and mark tasks as completed.
+        </p>
+        <small><b>Technologies:</b> JavaScript DOM Manipulation</small>
+      </div>
+
+      <div class="project glass">
+        <h3>🌦 Weather Forecast App</h3>
+        <p>
+          Weather application that fetches live data using API
+          and displays real-time temperature and conditions.
+        </p>
+        <small><b>Technologies:</b> API Integration, JavaScript</small>
+      </div>
+
+      <div class="project glass">
+        <h3>📚 Library Management System</h3>
+        <p>
+          Basic book issue-return management system using file handling
+          and object-oriented programming.
+        </p>
+        <small><b>Technologies:</b> Python</small>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="glass">
+    <h2>Contact Us</h2>
+    <form onsubmit="return validateForm()">
+      <input type="text" id="name" placeholder="Your Name">
+      <input type="email" id="email" placeholder="Your Email">
+      <textarea id="message" rows="4" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<script>
+
+// Sliding Scroll Animation
+const sections = document.querySelectorAll("section");
+
+window.addEventListener("scroll",()=>{
+  sections.forEach(sec=>{
+    const top = sec.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      sec.classList.add("show");
+    }
+  });
+});
+
+// Skill Animation
+window.addEventListener("scroll",()=>{
+  const skills = document.querySelectorAll(".progress");
+  skills.forEach(bar=>{
+    const top = bar.getBoundingClientRect().top;
+    if(top < window.innerHeight){
+      bar.style.width = bar.getAttribute("data-width");
+    }
+  });
+});
+
+// Active Nav Highlight
+const links = document.querySelectorAll(".nav-link");
+window.addEventListener("scroll",()=>{
+  let current="";
+  sections.forEach(sec=>{
+    if(pageYOffset >= sec.offsetTop-150){
+      current = sec.id;
+    }
+  });
+  links.forEach(link=>{
+    link.classList.remove("active");
+    if(link.getAttribute("href")==="#"+current){
+      link.classList.add("active");
+    }
+  });
+});
+
+// Mobile Menu
+const menuBtn=document.querySelector(".menu-btn");
+const navUl=document.querySelector("nav ul");
+
+menuBtn.addEventListener("click",()=>{
+  navUl.classList.toggle("showMenu");
+});
+
+// Form Validation
+function validateForm(){
+  const name=document.getElementById("name").value;
+  const email=document.getElementById("email").value;
+  const message=document.getElementById("message").value;
+
+  if(name===""||email===""||message===""){
+    alert("Please fill all fields!");
+    return false;
+  }
+  alert("Message Sent Successfully!");
+  return true;
+}
+
+</script>
+
+</body>
+</html>
