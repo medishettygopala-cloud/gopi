@@ -1,0 +1,236 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Multi User Portfolio System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    }
+
+    body{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    }
+
+    /* AUTH */
+    .auth-container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    }
+
+    .auth-box{
+    width:350px;
+    padding:30px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    text-align:center;
+    }
+
+    .auth-box input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    }
+
+    .auth-box button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:20px;
+    background:#ffeb3b;
+    font-weight:bold;
+    cursor:pointer;
+    }
+
+    /* DASHBOARD */
+    #dashboard{
+    display:none;
+    padding:40px 10%;
+    }
+
+    .card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    padding:20px;
+    border-radius:20px;
+    margin-bottom:20px;
+    }
+
+    textarea{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
+    }
+
+    .logout-btn{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ffeb3b;
+    font-weight:bold;
+    cursor:pointer;
+    }
+    </style>
+    </head>
+    <body>
+
+    <!-- SIGN UP -->
+    <div class="auth-container" id="signupPage">
+    <div class="auth-box">
+        <h2>Create Account</h2>
+        <input type="text" id="signupName" placeholder="Full Name">
+        <input type="email" id="signupEmail" placeholder="Email">
+        <input type="password" id="signupPassword" placeholder="Password">
+        <button onclick="signUp()">Sign Up</button>
+        <p id="signupMsg"></p>
+        <button onclick="showLogin()">Already have account? Sign In</button>
+    </div>
+    </div>
+
+    <!-- SIGN IN -->
+    <div class="auth-container" id="loginPage" style="display:none;">
+    <div class="auth-box">
+        <h2>Sign In</h2>
+        <input type="email" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p id="loginMsg"></p>
+        <button onclick="showSignup()">Create new account</button>
+    </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard">
+    <h2 id="welcomeText"></h2>
+
+    <div class="card">
+        <h3>About</h3>
+        <textarea id="aboutInput" placeholder="Write about yourself..."></textarea>
+    </div>
+
+    <div class="card">
+        <h3>Skills</h3>
+        <textarea id="skillsInput" placeholder="Write your skills..."></textarea>
+    </div>
+
+    <div class="card">
+        <h3>Projects</h3>
+        <textarea id="projectsInput" placeholder="Write your projects..."></textarea>
+    </div>
+
+    <div class="card">
+        <h3>Contact</h3>
+        <textarea id="contactInput" placeholder="Write your contact info..."></textarea>
+    </div>
+
+    <button onclick="saveProfile()">Save Profile</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+
+    let currentUser="";
+
+    // SWITCH PAGES
+    function showLogin(){
+    signupPage.style.display="none";
+    loginPage.style.display="flex";
+    }
+    function showSignup(){
+    loginPage.style.display="none";
+    signupPage.style.display="flex";
+    }
+
+    // SIGN UP
+    function signUp(){
+    const name=signupName.value;
+    const email=signupEmail.value;
+    const pass=signupPassword.value;
+
+    if(name && email && pass){
+
+        if(localStorage.getItem(email)){
+        signupMsg.innerHTML="User already exists!";
+        return;
+        }
+
+        localStorage.setItem(email, JSON.stringify({
+        name:name,
+        pass:pass,
+        about:"",
+        skills:"",
+        projects:"",
+        contact:""
+        }));
+
+        signupMsg.innerHTML="Account Created!";
+    }else{
+        signupMsg.innerHTML="Fill all fields!";
+    }
+    }
+
+    // LOGIN
+    function login(){
+    const email=loginEmail.value;
+    const pass=loginPassword.value;
+
+    const userData=JSON.parse(localStorage.getItem(email));
+
+    if(userData && userData.pass===pass){
+
+        currentUser=email;
+
+        signupPage.style.display="none";
+        loginPage.style.display="none";
+        dashboard.style.display="block";
+
+        welcomeText.innerText="Welcome "+userData.name;
+
+        aboutInput.value=userData.about;
+        skillsInput.value=userData.skills;
+        projectsInput.value=userData.projects;
+        contactInput.value=userData.contact;
+
+    }else{
+        loginMsg.innerHTML="Invalid Credentials!";
+    }
+    }
+
+    // SAVE PROFILE
+    function saveProfile(){
+
+    const userData=JSON.parse(localStorage.getItem(currentUser));
+
+    userData.about=aboutInput.value;
+    userData.skills=skillsInput.value;
+    userData.projects=projectsInput.value;
+    userData.contact=contactInput.value;
+
+    localStorage.setItem(currentUser, JSON.stringify(userData));
+
+    alert("Profile Saved Successfully!");
+    }
+
+    // LOGOUT
+    function logout(){
+    dashboard.style.display="none";
+    loginPage.style.display="flex";
+    }
+
+    </script>
+
+    </body>
+    </html>
